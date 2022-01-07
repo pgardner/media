@@ -39,7 +39,7 @@ folder()
 stage()
 {
   echo "Copying media from source folder to staging folder."
-  if [[ -d ${STAGE_DIR} ]] && cp -v ${SOURCE_DIR}/* ${STAGE_DIR}
+  if [[ -d ${STAGE_DIR} && -d ${SOURCE_DIR} ]] && cp -v ${SOURCE_DIR}/* ${STAGE_DIR}
 }
 
 publish()
@@ -52,7 +52,7 @@ archive()
 {
   echo "Archiving and removing staging folder."
   if [[ -d ${STAGE_DIR} ]] && zip -r ${STAGE_DIR}.zip ${STAGE_DIR}/
-  if [[ $? -ne 0 ]] && rm -rf ${STAGE_DIR}
+  if [[ $? -eq 0 ]] && rm -rf ${STAGE_DIR}
 }
 
 clean()
